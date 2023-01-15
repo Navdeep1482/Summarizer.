@@ -1,0 +1,92 @@
+{% extends 'base.html' %} 
+    {% comment %} django index . html ko jnata h to  vo yahan ayega fir dekhega body  ocntent. base.html main jao aur extend krro ,  {% endcomment %}
+    {% load static %}
+    {% block title %}
+    Mic To Text 
+    {% endblock title %}
+    <style>
+      {%block style%}  
+   
+      #mictext{
+        width:800px;
+        height:100px;
+      }
+      #mic{
+        width:30px;
+        height:40px; 
+      }
+      #mic img{
+        width:20px;
+        height:30px;           
+      }    
+
+      #mic:hover{
+        width:40px;
+        height:50px; 
+      }
+     
+      
+      #preloader{
+        background:#130b37;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity:90%;
+    height:100vh;
+    width:100vw;
+    position:fixed;
+    margin-top:-7%;
+    z-index:100;
+    visibility:hidden;
+      }
+      #preloader img{
+        margin-top:100px;
+        margin-left:300px;
+        height:65vh;
+        width:50vw;
+      }
+      .videoBox{
+        margin: auto;
+        margin-top: 5em;
+      width: 70%;
+      height:60vh;
+       border: 3px solid rgb(69, 69, 69);
+      padding: 3em;
+      box-shadow: 3px 3px 4px 4px grey;
+      }
+      {%endblock %}
+          </style>
+
+    {% block body %}
+    <div id="preloader"> 
+      <img src="{% static 'mic.gif' %}">
+    </div>
+    <div class=" videoBox">
+        <div class="mb-3">
+          <form action="{% url 'mictextgenerate'%}" method = "post">
+            {% csrf_token%}
+            <label for="exampleFormControlInput1" class="form-label heading">Type What You Speak &nbsp</label>
+            <button id="mic"><img src="{% static 'mic_icon.jpg' %}"> </button>
+           </form>
+        </div>
+          
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label heading">Text: </label>
+            <textarea id="mictext">{{micoutput}}</textarea>
+          </div>
+    </div>
+
+    <script>
+      var loader=document.getElementById("preloader");
+     var btn=document.getElementById("mic");
+     btn.addEventListener("click",function(){
+      loader.style.visibility="visible";   
+      loader.addEventListener("click",function(){
+        loader.style.visibility="hidden";
+      })   
+     })
+
+    </script>
+    {% endblock body %}
+
+    

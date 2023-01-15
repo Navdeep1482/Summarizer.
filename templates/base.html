@@ -1,0 +1,74 @@
+{% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=ed ge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}  {% endblock title%} </title>
+        <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <style>
+         {%block style%}{%endblock %}
+    </style>
+    </head>
+    <body>
+
+         <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'logo.jpg' %}" alt="logo" height="40px" width="50px"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item nav-item1">
+                    <a class="nav-link " aria-current="page" href="{% url 'home' %}">Home</a>
+                  </li>
+                   
+                </ul>
+                </div>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item1">
+                        <a class="nav-link " href="{% url 'texttosummary' %}">Text To Summary</a>
+                      </li>
+                      
+                      <li class="nav-item1">
+                        <a class="nav-link" href="{% url 'videototext' %}">Video To Text</a>
+                      </li>
+                      <li class="nav-item1">
+                        <a class="nav-link" href="{% url 'mictotext' %}">MicAudio To Text</a>
+                      </li>  
+                      <li class="nav-item1">
+                        <a class="nav-link " href="{% url 'videotomp3' %}">Video To Mp3</a>
+                      </li> 
+                    </ul>
+                    </div>
+            </div>
+          </nav>
+        
+          {% block body %} 
+           {% endblock body%}
+    
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+           <script>
+               $(function() {
+                   $X = $('.box');
+                   for( var i = 0; i < 4; i++) {
+                       $('.container').append($X.clone()); 
+                   }
+               });
+           </script>    
+
+           
+           <script src="https://kit.fontawesome.com/8f9fff2a16.js" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    
+    </html>

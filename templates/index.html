@@ -1,0 +1,68 @@
+
+    {% extends 'base.html' %} 
+    {% comment %} django index . html ko jnata h to  vo yahan ayega fir dekhega body  ocntent. base.html main jao aur extend krro ,  {% endcomment %}
+    {% load static %}
+    {% block title %}
+    VideoTranscript 
+    {% endblock title %}
+
+   
+<style>
+  {%block style%}     
+
+  #summarytext{
+    width:800px;
+    height:100px;
+  }  
+  #preloader{
+    background:#222222;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity:90%;
+    height:100vh;
+    width:100vw;
+    position:fixed;
+    z-index:100;
+    visibility:hidden;
+}
+#preloader img{
+  margin-top:100px;
+  margin-left:350px;
+  height:60vh;
+  width:50vw;
+}
+  {%endblock %}
+      </style>      
+
+    {% block body %}
+
+    <div id="preloader"> 
+      <img src="{% static 'loader.gif' %}">
+    </div>
+
+    <div class=" videoBox">
+      <div class="mb-3">
+        <form method = "post" action="{% url 'submitform'%}">
+          {% csrf_token%}
+          <label for="exampleFormControlInput1" class="form-label heading">Youtube URL to Summary</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="https://youtube/kBo3ipDEH6k3nb4" name="videourl">
+          <br>      
+          <button id="summarybtn"class="btnSubmit button" type="submit"><span>Submit</span></button>
+          </form>
+          </div>
+        
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label heading">Summary Generated:</label>
+          <textarea id="summarytext">{{output}}</textarea>
+          
+  </div>
+
+  <script>
+    var loader=document.getElementById("preloader");
+     var btn=document.getElementById("summarybtn");
+     btn.addEventListener("click",function(){
+      loader.style.visibility="visible";      
+     })
+  </script>
+    {% endblock body %}

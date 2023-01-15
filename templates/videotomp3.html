@@ -1,0 +1,111 @@
+
+{% extends 'base.html' %} 
+{% comment %} django index . html ko jnata h to  vo yahan ayega fir dekhega body  ocntent. base.html main jao aur extend krro ,  {% endcomment %}
+{% load static %}
+{% block title %}
+Video To Mp3
+{% endblock title %}
+
+<style>
+  {%block style%}
+  
+  
+  .videoBox{
+    margin: auto;
+    margin-top: 5em;
+  width: 70%;
+  border: 3px solid rgb(69, 69, 69);
+  padding: 3em;
+  box-shadow: 3px 3px 4px 4px grey;
+  }
+  
+  .btnSubmit
+  {
+  margin: 2vh 0px;
+  padding: 1vh;
+  border: 0px;
+  box-shadow: 1px 2px ;
+  }
+  
+  .nav-item1{
+   border: 2px solid ; 
+   margin: 1em;
+   box-shadow: 2px 2px 2px;
+  }
+  .heading{
+    font-weight: bolder;
+    color:white;
+  }
+  .button {
+    border-radius: 4px;
+    background-color: grey;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 10px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+ 
+  {%endblock %}
+      </style>
+
+{% block body %}
+<div class=" videoBox">
+  <div class="mb-3">
+    <form action="{% url 'audiosubmitform'%}" method = "post">
+      {% csrf_token%}
+      <label for="exampleFormControlInput1" class="form-label heading">Video to MP3 Audio</label>
+      <input type="file" class="form-control myVideo" id="exampleFormControlInput1" placeholder="https://youtube/kBo3ipDEH6k3nb4" name="audioinp">
+      <br>       
+      <button id="audiobtn"class="btnSubmit button"><span>Submit</span></button>
+      </form>
+      </div>
+    
+    <div class="mb-3" id ="audiofinal">
+      <label for="exampleFormControlTextarea1" class="form-label heading">Audio Generated:</label>
+      <audio class="audioBox" controls>
+        {% comment %} <source src="{%static 'demo.mp3' %}" type="audio/mp3">   {% endcomment %}
+        <source src={{audiofile}} type="audio/mp3">  
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+</div>
+
+<script>
+  {% comment %} var audiofinal = document.getElementById("audiofinal"); {% endcomment %}
+     var btn = document.getElementById("audiobtn");
+     btn.addEventListener("click",function(){             
+        window.location.reload();
+        });
+</script> 
+{% endblock body %}
